@@ -29,7 +29,7 @@ to quickly create a Cobra application.`,
         if len(args) >= 1 && args[0] != "" {
             shorternedUrl = args[0]
 		}
-		// remove http/https if match
+		// remove http/https if matched
 		re, err := regexp.Compile(`[http][s]?[://]`)
 		if err != nil {
 			log.Fatal(err)
@@ -57,6 +57,7 @@ to quickly create a Cobra application.`,
 			// ? Domain? if trust level is recognize as safety, still need domain check?   
 			// trustLevel -> numbers from WOT in future
 		}
+		// Prints: 
 		// the site is "Dangerous"!  [warning color]
 		// with [how many] cookies
 		// [links] [saperate dots if dangerous]
