@@ -6,7 +6,6 @@ package cmd
 
 import (
 	"fmt"
-	"go/types"
 	"log"
 	"regexp"
 
@@ -43,6 +42,7 @@ to quickly create a Cobra application.`,
 		URL := "https://unshorten.link/check?url=https://" + shorternedUrl
 		
 		// get dataset
+		type Safety int
 		const (
 			Undefined Safety = iota
 			// Danger
