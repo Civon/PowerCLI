@@ -7,6 +7,7 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/Civon/PowerCLI/internal/prefly"
 	"github.com/spf13/cobra"
@@ -25,8 +26,19 @@ var destCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		pf.Go()
-		fmt.Printf("最終導向網址為：%s", pf.Dest)
+
+		domain := getDomain(pf.Dest)
+		fmt.Println("Domain: "+ domain)
+		fmt.Println("Destination URL:\n"+ pf.Dest)
 	},
+}
+
+//? replace with map()
+func getDomain(s string) (res string) {
+	withoutQuery := strings.Split(s, "/")[2]
+	withoutSubDomain := strings.Split(withoutQuery, ".")[2:]
+	res = strings.Join(withoutSubDomain, ".")
+	return
 }
 
 func init() {
