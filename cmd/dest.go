@@ -33,7 +33,6 @@ var destCmd = &cobra.Command{
 	},
 }
 
-//-
 //? replace with map()
 func getDomain(s string) (res string) {
 	withoutQuery := strings.Split(s, "/")[2]
