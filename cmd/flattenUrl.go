@@ -25,8 +25,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var shorternedUrl = "https://t.ly/nkeY"
 
-        if len(args) >= 1 && args[0] != "" {
-            shorternedUrl = args[0]
+		if len(args) >= 1 && args[0] != "" {
+			shorternedUrl = args[0]
 		}
 		// remove http/https if matched
 		re, err := regexp.Compile(`[http][s]?[://]`)
@@ -37,10 +37,10 @@ to quickly create a Cobra application.`,
 		}
 		shorternedUrl = re.ReplaceAllString(shorternedUrl, "")
 		fmt.Println("Try to get '" + shorternedUrl + "' Info...")
-		
+
 		// data provied by WOT & unshorten.link
-		URL := "https://unshorten.link/check?url=https://" + shorternedUrl
-		
+		_ = "https://unshorten.link/check?url=https://" + shorternedUrl
+
 		// get dataset
 		type Safety int
 		const (
@@ -51,13 +51,13 @@ to quickly create a Cobra application.`,
 		)
 
 		type UrlMeta struct {
-			redirectUrl	string
-			safety int
-			cookies int
-			// ? Domain? if trust level is recognize as safety, still need domain check?   
+			redirectUrl string
+			safety      int
+			cookies     int
+			// ? Domain? if trust level is recognize as safety, still need domain check?
 			// trustLevel -> numbers from WOT in future
 		}
-		// Prints: 
+		// Prints:
 		// the site is "Dangerous"!  [warning color]
 		// with [how many] cookies
 		// [links] [saperate dots if dangerous]
