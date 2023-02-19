@@ -1,6 +1,5 @@
 /*
 Copyright © 2022 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
@@ -8,6 +7,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/manifoldco/promptui"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -27,6 +27,35 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+	Run: func(cmd *cobra.Command, args []string) {
+		//  fmt.Println(rootCmd.Commands)
+		subcommands := cmd.Commands()
+
+		options := make([]string, 0, len(subcommands))
+		for _, subcmd := range subcommands {
+			fmt.Printf("- %s\n", subcmd.Name())
+			options = append(options, subcmd.Name())
+		}
+
+		prompt := promptui.Select{
+			Label: "Select an option",
+			Items: options,
+		}
+		_, selected, err := prompt.Run()
+		if err != nil {
+			fmt.Printf("Prompt failed %v\n", err)
+			return
+		}
+		// fmt.Printf("You selected %q\n", selected)
+		for _, subcmd := range subcommands {
+			if selected == subcmd.Name() {
+				subcmd.Run( subcmd , args)
+				
+				// subcmd.Execute()
+				break
+			}
+		}
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
